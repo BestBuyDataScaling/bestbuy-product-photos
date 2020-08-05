@@ -1,1 +1,1 @@
-# pricing-cart_service
+# productInfo-photos_service

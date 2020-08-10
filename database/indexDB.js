@@ -54,11 +54,13 @@ let saveToDB = (model) => {
   new_product.save();
 };
 
-let promiseData = videoGameData.data.map(async (product) => {
-  return product;
-});
-Promise.all(promiseData).then((products) => {
-  products.map((product) => {
-    saveToDB(product);
-  });
-});
+// * Seeds Database
+// let promiseData = videoGameData.data.map(async (product) => {
+//   return product;
+// });
+// Promise.all(promiseData).then((products) => {
+//   products.map((product) => {
+//     saveToDB(product);
+//   });
+// });
+

@@ -1,73 +1,110 @@
 #main-component-container {
   padding-top: 20px;
 }
-
-#product-title {
-  margin: 0px;
-
-}
-
-.productStats {
-  margin: 0px;
-  padding-top: 10px;
-  padding-bottom: 5px
-}
-
-.star-ratings {
-  padding-right: 5px;
-}
-
 #directory {
   padding-bottom: 10px;
   padding-left: 22px;
   font-size: 14px;
 }
-
-.primary-button {
-  margin-top: 30px;
-  text-align: center;
-}
-
-.thumbnail {
-  padding:10px;
-}
-
 #left-column {
   padding-top: 20px;
   margin-bottom: 0px;
 }
 
+/* TITLE CARD  */
+p {
+  margin: 0px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
 #product-title {
   font-size: 22px;
   padding-top: 5px;
+  margin: 0px;
 }
-
+.productStats {
+  padding-top: 10px;
+  margin: 0px;
+}
+.star-ratings {
+  margin: 0px;
+  padding-right: 5px;
+  padding-top: 5px;
+}
 .title-card {
   padding-left: 22px;
 }
-
-#price {
-  border-bottom: 1px solid black;
-  padding-bottom: 20px;
+/* IMAGES */
+.primary-button {
+  margin-top: 30px;
+  text-align: center;
 }
+.thumbnail {
+  padding:10px;
+}
+
 
 #right-column {
   padding-right: 30px;
 }
 
+/* PRICING */
+#price {
+  border-bottom: 1px solid black;
+  padding-bottom: 20px;
+}
 .protection {
   padding-top: 30px;
   padding-left: 10px;
   padding-bottom: 10px;
-
 }
-
 #protection {
   margin-top: 20px;
   padding-bottom:20px;
   border-bottom: 1px solid black;
 }
-
-#protection-price {
+p #protection-price {
+  color: gold;
   text-align: right;
+}
+#learnMore {
+  padding-left: 14px;
+}
+
+/* SHIPPING */
+.shipping{
+  padding-top: 10px;
+}
+#shipping {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid black;
+}
+#pickup {
+  color:rgb(48, 136, 0);
+}
+#pickupContainer {
+  margin-bottom: 10px
+}
+
+/* ADD TO CART */
+.addtocart {
+  border-bottom: 1px solid black;
+}
+#cartbutton {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  margin-top: 30px;
+  background-color: #ffe000;
+  font-weight: bold;
+}
+#bundle {
+  margin-top:20px;
+  margin-bottom: 30px;
+  background-color: blue;
+  color: white;
+  font-weight: bold;
+}
+.offers {
+  padding-top: 20px;
 }

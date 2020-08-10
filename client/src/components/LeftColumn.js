@@ -30,7 +30,7 @@ const LeftColumn = (props) => {
           alignItems="center">
           <StarRatings
             rating={4.8}
-            starRatedColor="yellow"
+            starRatedColor="#ffe000"
             numberOfStars={5}
             starDimension="20px"
             starSpacing="0px"

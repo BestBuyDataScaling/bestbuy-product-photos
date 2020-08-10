@@ -61,7 +61,7 @@ const Pricing = (props) => {
           <p>2-year Geek Squad Product Replacement</p>
           <p id="protection-price">$9.99</p>
         </Grid>
-        <a href="https://www.bestbuy.com/site/geek-squad-protection/product-replacement-plan/pcmcat281800050012.c?id=pcmcat281800050012">Learn More</a>
+        <a id="learnMore" href="https://www.bestbuy.com/site/geek-squad-protection/product-replacement-plan/pcmcat281800050012.c?id=pcmcat281800050012">Learn More</a>
       </div>
     </div>
   );

@@ -11,7 +11,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div id="main component container">
+      <div id="main-component-container">
         <Directory />
         <div id="main display">
           <ProductInfo />

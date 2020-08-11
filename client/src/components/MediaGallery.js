@@ -6,8 +6,11 @@ import Thumbnails from "./Thumbnails"
 const MediaGallery = (props) => {
   return (
     <div>
-      <ImageWrapper />
-      <Thumbnails />
+      <ImageWrapper mainImage={props.mainImage} />
+      <Thumbnails images={props.images}
+        thumbnailClicker={props.thumbnailClicker}
+
+      />
     </div>
   );
 };

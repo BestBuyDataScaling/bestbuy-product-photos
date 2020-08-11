@@ -1,5 +1,4 @@
 import React from "react";
-import Grid from "@material-ui/core/Grid";
 import Pricing from "./Pricing";
 import AddToCart from "./AddToCart";
 
@@ -8,7 +7,11 @@ import AddToCart from "./AddToCart";
 const RightColumn = (props) => {
   return (
     <div>
-      <Pricing />
+      <Pricing price={props.price}
+        options={props.options}
+        option={props.option}
+        selectOnChange={props.selectOnChange}
+      />
       <AddToCart />
     </div>
   );

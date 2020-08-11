@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const port = 2019;
 const cors = require("cors");
+const db = require("../database/indexDB")
 
 //requirements
 
@@ -10,8 +11,16 @@ app.use(express.json());
 app.use(cors());
 
 // server routing
-app.get("/", (req, res) => {
-  res.send("Hello World");
+app.get("/api/products/:id", (req, res) => {
+  let id = req.params.id
+  db.grabOne(id, (err, product) => {
+    if (err) {
+      console.log("PROBLEM WITH DB", err)
+    } else {
+      console.log("QUERY SUCCESSFUL")
+      res.send(product);
+    }
+  })
 });
 
 // listening

@@ -63,4 +63,3 @@ let saveToDB = (model) => {
 //     saveToDB(product);
 //   });
 // });
-

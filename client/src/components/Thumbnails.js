@@ -9,8 +9,11 @@ const Thumbnails = (props) => {
         container
         justify="center"
         direction="row">
-        <Thumbnail />
-        <Thumbnail />
+        {props.images.map(image => {
+          return <Thumbnail image={image} key={image}
+            thumbnailClicker={props.thumbnailClicker}
+          />
+        })}
       </Grid>
     </div>
   );

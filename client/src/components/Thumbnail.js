@@ -2,9 +2,9 @@ import React from "react";
 
 const Thumbnail = (props) => {
   return (
-    <div className="thumbnail">
+    <div className="thumbnail" onClick={props.thumbnailClicker}>
       <img className="thumbnail-image"
-        src="https://pisces.bbystatic.com/image2/BestBuy_US/images/products/5721/5721500cv12d.jpg;maxHeight=120;maxWidth=120"
+        src={props.image}
       />
     </div>
   );

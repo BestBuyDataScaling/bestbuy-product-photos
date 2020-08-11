@@ -8,10 +8,8 @@ const LeftColumn = (props) => {
   return (
     <div>
       <div className="title-card">
-        <a href="https://www.bestbuy.com/site/nintendo-switch/nintendo-switch-games/pcmcat1484080052161.c?id=pcmcat1484080052161&qp=brand_facet=Brand~Nintendo">Nintendo</a>
-        <h3 id="product-title">
-          The Legend of Zelda: Breath of the Wild - Nintendo Switch
-            </h3>
+        <a href="https://www.bestbuy.com/site/nintendo-switch/nintendo-switch-games/pcmcat1484080052161.c?id=pcmcat1484080052161&qp=brand_facet=Brand~Nintendo">{props.brand}</a>
+        <h3 id="product-title">{props.name}</h3>
         <Grid
           container
           className="productStats"
@@ -19,9 +17,9 @@ const LeftColumn = (props) => {
           alignItems="center"
         >
           <strong>Brand:</strong>
-          <p>Nintendo </p>
+          <p>{props.brand}</p>
           <strong>SKU:</strong>
-          <p>5721500</p>
+          <p>{props.sku}</p>
         </Grid>
         <Grid
           container
@@ -29,17 +27,22 @@ const LeftColumn = (props) => {
           direction="row"
           alignItems="center">
           <StarRatings
-            rating={4.8}
+            rating={props.avgRating}
             starRatedColor="#ffe000"
             numberOfStars={5}
             starDimension="20px"
             starSpacing="0px"
             name="product-rating"
           />
-          <p>4.9</p>
+          <p>{props.avgRating}</p>
         </Grid>
       </div>
-      <MediaGallery />
+      <MediaGallery
+        images={props.images}
+        mainImage={props.mainImage}
+        thumbnailClicker={props.thumbnailClicker}
+
+      />
     </div>
   );
 };

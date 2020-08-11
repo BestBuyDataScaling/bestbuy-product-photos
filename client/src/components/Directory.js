@@ -14,11 +14,11 @@ const Directory = (props) => {
         <a href="https://www.bestbuy.com/">Best Buy</a>
         <p> - </p>
         <a href="https://www.bestbuy.com/site/electronics/video-games/abcat0700000.c?id=abcat0700000">
-          Video Games
+          {props.department}
         </a>
         <p> - </p>
         <a href="https://www.bestbuy.com/site/video-games/nintendo-switch/pcmcat1476977522176.c?id=pcmcat1476977522176">
-          Nintendo Switch
+          {props.subDept}
         </a>
       </Grid>
     </div>

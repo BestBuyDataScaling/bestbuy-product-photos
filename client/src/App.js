@@ -7,45 +7,39 @@ class App extends React.Component {
     super();
     this.thumbnailClicker = this.thumbnailClicker.bind(this);
     this.selectOnChange = this.selectOnChange.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
 
     this.state = {
+      formValue: '',
       option: 'black',
       mainImage: `https://pisces.bbystatic.com/image2/BestBuy_US/images/products/5388/5388900_sd.jpg;maxHeight=640;maxWidth=550`,
-      uniqueID: 123,
-      name:
-        'Microsoft - Surface Pro 6 - 12.3" Touch Screen - Intel Core i5 - 8GB Memory - 256GB Solid State Drive',
-      description:
-        "Complete presentations with this 12.3-inch Microsoft Surface Pro 6 bundle. The Intel Core i5 processor and 8GB of RAM power programs that keep you on task, and the 256GB solid-state drive lacks moving parts to operate quietly.",
-      brand: "Microsoft",
-      department: "Computers",
-      color: "Black",
-      subDept: "Laptops",
-      sku: 6306014,
-      price: 930.99,
-      avgRating: 4.7,
-      colors: ["Black"],
+      uniqueID: 1,
+      name: "Sony - PlayStation 4 1TB Console - Jet Black",
+      description: `
+      Battle friends and foes with the Sony PlayStation 4 Pro console. Its 1TB capacity lets you store plenty of games without an external hard drive, and the dual-shock controller improves your hands-on gaming experience. See enemies in clear, vibrant detail with the included HDMI cable of the Sony PlayStation 4 Pro console.`,
+      brand: "Sony",
+      department: "Video Games",
+      color: "Jet Black",
+      subDept: "PlayStation 4",
+      sku: 5388900,
+      price: 399.99,
+      avgRating: 4.8,
+      colors: ["black"],
       reviews: [],
       questions: {
-        question:
-          "Does this work with the full and regular version of Office 365 where you can create and use real Excel spreadsheets that support macros?",
-        answer:
-          "Yep! It runs full Windows 10 and full versions of all the Office365 products.",
+        question: `Q: What's the difference between the PS4 Slim and the PS4 Pro?`,
+        answer: `A: The PS4 Slim outputs games at full 1080p, while the PS4 Pro can output games at up to 4K resolution (2160p). If you have a 4K television, you'll see a noticeable difference in game quality. Note that not all games support 4K, but some will receive updates such as higher framerates, making gameplay smoother.`,
       },
       images: [
-        "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6306/6306014ld.jpg",
-        "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6306/6306014cv13d.jpg",
-        "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6306/6306014cv12d.jpg",
+        `https://pisces.bbystatic.com/image2/BestBuy_US/images/products/5388/5388900_sd.jpg;maxHeight=640;maxWidth=550`,
+        `https://pisces.bbystatic.com/image2/BestBuy_US/images/products/5388/5388900_rd.jpg;maxHeight=640;maxWidth=550`,
+        `https://pisces.bbystatic.com/image2/BestBuy_US/images/products/5388/5388900cv11d.jpg;maxHeight=640;maxWidth=550`,
       ],
       peopleAlsoBought: [],
       peopleAlsoViewed: [],
       recentlyViewed: false,
     };
-  }
-  componentDidMount() {
-    this.setState({
-      mainImage: this.state.images[0],
-      option: this.state.colors[0]
-    })
   }
 
   thumbnailClicker(e) {
@@ -53,9 +47,51 @@ class App extends React.Component {
   }
 
   selectOnChange(e) {
-    console.log(e.target.value)
     this.setState({ option: e.target.value })
   }
+
+
+  // FORM STUFF
+  handleChange(event) {
+    this.setState({ formValue: event.target.value });
+  }
+  handleSubmit(e) {
+    e.preventDefault();
+    let id = this.state.formValue
+    fetch(`http://localhost:2019/api/products/${id}`)
+      .then(response => response.json())
+      .then(data => {
+        this.setState({
+          uniqueID: data.uniqueID,
+          name: data.name,
+          description: data.description,
+          brand: data.brand,
+          department: data.department,
+          color: data.color,
+          subDept: data.subDept,
+          sku: data.sku,
+          price: data.price,
+          avgRating: data.avgRating,
+          colors: data.colors,
+          reviews: data.reviews,
+          // questions: {
+          //   question: data.questions.question,
+          //   answer: data.questions.answer,
+          // },
+          images: data.images,
+          peopleAlsoBought: data.peopleAlsoBought,
+          peopleAlsoViewed: data.peopleAlsoViewed,
+          recentlyViewed: data.recentlyViewed,
+
+          mainImage: data.images[0],
+          option: data.colors[0]
+        })
+      });
+    //.catch (console.log("Issue with API"))
+    this.setState({ formValue: '' })
+  }
+
+
 
   render() {
     const { department, subDept, brand, sku,
@@ -63,6 +99,13 @@ class App extends React.Component {
     } = this.state
     return (
       <div id="main-component-container">
+        <form onSubmit={this.handleSubmit}>
+          <label>
+            Product ID:
+            <input type="text" value={this.state.formValue} onChange={this.handleChange} />
+          </label>
+          <input type="submit" value="Submit" />
+        </form>
         <Directory
           department={department}
           subDept={subDept}

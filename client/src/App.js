@@ -82,7 +82,6 @@ class App extends React.Component {
           peopleAlsoBought: data.peopleAlsoBought,
           peopleAlsoViewed: data.peopleAlsoViewed,
           recentlyViewed: data.recentlyViewed,
-
           mainImage: data.images[0],
           option: data.colors[0]
         })

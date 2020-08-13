@@ -72,6 +72,10 @@ p {
 #price {
   border-bottom: 1px solid black;
   padding-bottom: 20px;
+  margin-bottom: 40px;
+}
+#options {
+  margin-top: 10px;
 }
 .protection {
   padding-top: 30px;

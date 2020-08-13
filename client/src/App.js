@@ -43,6 +43,7 @@ class App extends React.Component {
   }
 
   thumbnailClicker(e) {
+    console.log(e.target)
     this.setState({ mainImage: e.target.src })
   }
 

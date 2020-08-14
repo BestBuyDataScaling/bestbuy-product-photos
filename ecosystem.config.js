@@ -10,7 +10,7 @@ module.exports = {
       key: '~/.ssh/front-end-capstone.pem',
       ref: 'origin/master',
       repo: 'git@github.com:ATX-50-Team-Best-Buy/productInfo-photos_service.git',
-      path: '/home/ubuntu/productInfo-photos_service',
+      path: '~/productInfo-photos_service',
       'post-deploy': 'nonsensical && npm install && pm2 startOrRestart ecosystem.config.js'
     }
   }

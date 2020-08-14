@@ -11,7 +11,7 @@ module.exports = {
       ref: 'origin/master',
       repo: 'git@github.com:ATX-50-Team-Best-Buy/productInfo-photos_service.git',
       path: '/home/ubuntu/champagne',
-      'post-deploy': 'npm install && npm run build && pm2 startOrRestart ecosystem.config.js'
+      'post-deploy': 'npm install && cd client && npm install && npm run build && cd .. && pm2 startOrRestart ecosystem.config.js'
     }
   }
 }

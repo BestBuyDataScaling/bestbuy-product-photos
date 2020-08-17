@@ -59,7 +59,7 @@ class App extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     let id = this.state.formValue
-    fetch(`http://localhost:2019/api/products/${id}`)
+    fetch(`/api/products/${id}`)
       .then(response => response.json())
       .then(data => {
         this.setState({
@@ -86,8 +86,8 @@ class App extends React.Component {
           mainImage: data.images[0],
           option: data.colors[0]
         })
-      });
-    //.catch (console.log("Issue with API"))
+      })
+      .catch(console.log("Issue with API"))
     this.setState({ formValue: '' })
   }
 

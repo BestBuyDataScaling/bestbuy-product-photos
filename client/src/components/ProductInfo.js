@@ -23,9 +23,11 @@ const ProductInfo = (props) => {
         </Grid>
         <Grid id="right-column" item xs={4}>
           <RightColumn
+            name={props.name}
             price={props.price}
             options={props.options}
             option={props.option}
+            images={props.images}
             selectOnChange={props.selectOnChange}
           />
         </Grid>

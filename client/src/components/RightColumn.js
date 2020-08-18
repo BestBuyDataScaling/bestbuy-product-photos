@@ -10,9 +10,14 @@ const RightColumn = (props) => {
       <Pricing price={props.price}
         options={props.options}
         option={props.option}
+        images={props.images}
         selectOnChange={props.selectOnChange}
       />
-      <AddToCart />
+      <AddToCart images={props.images}
+        name={props.name}
+        price={props.price}
+        option={props.option}
+      />
     </div>
   );
 };

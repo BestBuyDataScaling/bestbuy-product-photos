@@ -1,9 +1,10 @@
 #main-component-container {
   padding-top: 20px;
+  margin-left: 80px;
+  margin-right: 80px;
 }
 #directory {
   padding-bottom: 10px;
-  padding-left: 22px;
   font-size: 14px;
 }
 #left-column {
@@ -31,9 +32,6 @@ p {
   padding-right: 5px;
   padding-top: 5px;
 }
-.title-card {
-  padding-left: 22px;
-}
 /* IMAGES */
 .primary-button {
   margin-top: 30px;
@@ -56,7 +54,7 @@ p {
 }
 .thumbnail-image {
   width: 70px;
-  max-height: 70px;;
+  max-height: 70px;
 }
 .thumbnail:hover {
   border: 1px solid blue;
@@ -121,6 +119,9 @@ p {
 .addtocart {
   border-bottom: 1px solid black;
 }
+.added {
+  color: rgb(48, 136, 0);
+}
 #cartbutton {
   padding-top: 15px;
   padding-bottom: 15px;
@@ -137,6 +138,27 @@ p {
 }
 .offers {
   padding-top: 20px;
+}
+
+/* MODAL */
+#check {
+  font-size: 40px;
+  color: rgb(48, 136, 0);
+}
+#cart-top {
+  padding-top: 40px;
+  margin-bottom: 50px
+}
+.cart-image {
+  width: 70px;
+  max-height: 70px;
+}
+#checkout {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  margin-top: 30px;
+  background-color: #ffe000;
+  font-weight: bold;
 }
 
 /* css problems? add initials  */

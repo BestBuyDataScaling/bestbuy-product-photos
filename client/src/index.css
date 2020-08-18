@@ -74,8 +74,8 @@ p {
   padding-bottom: 20px;
   margin-bottom: 40px;
 }
-#options {
-  margin-top: 10px;
+#mlc-options{
+  width: 100%;
 }
 .protection {
   padding-top: 30px;

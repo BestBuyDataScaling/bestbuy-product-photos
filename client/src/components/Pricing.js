@@ -8,19 +8,8 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Checkbox from '@material-ui/core/Checkbox';
 
-const useStyles = makeStyles((theme) => ({
-  formControl: {
-    margin: theme.spacing(0),
-    minWidth: 100,
-    display: 'flex',
-  },
-  selectEmpty: {
-    marginTop: theme.spacing(2),
-  },
-}));
 
 const Pricing = (props) => {
-  const classes = useStyles();
 
   return (
     <div>
@@ -30,22 +19,20 @@ const Pricing = (props) => {
       <div>
         <h1 id="price">${props.price}</h1>
       </div>
-      <div id="options">
-        <FormControl variant="outlined" className={classes.formControl}>
-          <InputLabel id="options-label">Options</InputLabel>
-          <Select
-            labelId="options-select"
-            id="demo-simple-select-outlined"
-            value={props.option}
-            onChange={props.selectOnChange}
-            label="Options"
-          >
-            {props.options.map(option => {
-              return <MenuItem key={option} value={option}>{option}</MenuItem>
-            })}
-          </Select>
-        </FormControl>
-      </div>
+      <FormControl variant="outlined" id="mlc-options">
+        <InputLabel id="options-label">Options</InputLabel>
+        <Select
+          labelId="options-select"
+          id="demo-simple-select-outlined"
+          value={props.option}
+          onChange={props.selectOnChange}
+          label="Options"
+        >
+          {props.options.map(option => {
+            return <MenuItem key={option} value={option}>{option}</MenuItem>
+          })}
+        </Select>
+      </FormControl>
       <div id="protection">
         <Grid
           container

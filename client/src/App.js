@@ -59,7 +59,7 @@ class App extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     let id = this.state.formValue
-    fetch(`/api/products/${id}`)
+    fetch(`http://ec2-3-15-234-135.us-east-2.compute.amazonaws.com/api/products/${id}`)
       .then(response => response.json())
       .then(data => {
         this.setState({
@@ -87,7 +87,7 @@ class App extends React.Component {
           option: data.colors[0]
         })
       })
-      .catch(console.log("Issue with API"))
+    //.catch(console.log("Issue with API"))
     this.setState({ formValue: '' })
   }
 

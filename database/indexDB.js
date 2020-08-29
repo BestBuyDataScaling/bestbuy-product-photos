@@ -1,62 +1,114 @@
-const mongoose = require("mongoose");
-const videoGameData = require("./videoGameData");
-mongoose.connect("mongodb://localhost/front-end-capstone", { useNewUrlParser: true, useUnifiedTopology: true });
+// const mongoose = require("mongoose");
+// const videoGameData = require("./videoGameData");
+// mongoose.connect("mongodb://localhost/front-end-capstone", { useNewUrlParser: true, useUnifiedTopology: true });
 
-let productSchema = mongoose.Schema({
-  uniqueID: Number,
-  name: String,
-  description: String,
-  brand: String,
-  department: String,
-  color: String,
-  subDept: String,
-  sku: Number,
-  price: Number,
-  avgRating: Number,
-  colors: Array,
-  reviews: Array,
-  questions: {
-    question: String,
-    answer: String,
-  },
-  images: Array,
-  peopleAlsoBought: Array,
-  peopleAlsoViewed: Array,
-  recentlyViewed: Boolean,
-});
+const MongoClient = require("mongodb").MongoClient;
+const assert = require("assert");
 
-let Product = mongoose.model("Product", productSchema);
+// Connection URL
+const url = "mongodb://localhost:27017";
 
-let saveToDB = (model) => {
-  var new_product = new Product({
-    uniqueID: model.uniqueID,
-    name: model.name,
-    description: model.description,
-    brand: model.brand,
-    department: model.department,
-    color: model.color,
-    subDept: model.subDept,
-    sku: model.sku,
-    price: model.price,
-    avgRating: model.avgRating,
-    colors: model.colors,
-    reviews: model.reviews,
-    questions: {
-      question: model.questions.question,
-      answer: model.questions.answer,
-    },
-    images: model.images,
-    peopleAlsoBought: model.peopleAlsoBought,
-    peopleAlsoViewed: model.peopleAlsoViewed,
-    recentlyViewed: model.recentlyViewed,
+// Database Name
+const dbName = "LegacyFEC";
+
+// Get/Read route function
+function getFunction(id, callback) {
+  MongoClient.connect(url, { useUnifiedTopology: true }, function (
+    err,
+    client
+  ) {
+    assert.equal(null, err);
+    console.log("Connected successfully to dataabse to server");
+    let db = client.db(dbName);
+
+    db.collection("legacyProducts").findOne(
+      { uniqueID: id },
+      (findErr, result) => {
+        if (findErr) {
+          throw findErr;
+        }
+        callback(null, result);
+      }
+    );
+    // client.close(); - cannot use sessions that ended?
   });
-  console.log("creating a schema");
-  new_product.save();
-};
-
-let grabOne = (id, callback) => {
-  Product.findOne({ uniqueID: id }).exec(callback);
 }
+
+// Post/Create route function
+function postFunction(product, callback) {
+  MongoClient.connect(url, { useUnifiedTopology: true }, function (
+    err,
+    client
+  ) {
+    assert.equal(null, err);
+    console.log("Connected successfully to dataabse to server");
+    let db = client.db(dbName);
+
+    //testing if received data.
+    db.collection("legacyProducts").save(product, (findErr, result) => {
+      if (findErr) {
+        throw findErr;
+      }
+      callback(null, result);
+    });
+  });
+}
+
+// Put/Update route function
+function putFunction(product, callback) {
+  MongoClient.connect(url, { useUnifiedTopology: true }, function (
+    err,
+    client
+  ) {
+    assert.equal(null, err);
+    console.log("Connected successfully to dataabse to server");
+    let db = client.db(dbName);
+
+    db.collection("legacyProducts").update(
+      { uniqueID: product.uniqueID },
+      { $set: { images: product.images } },
+      function (findErr, result) {
+        if (findErr) {
+          throw findErr;
+        }
+        callback(null, result);
+      }
+    );
+  });
+}
+
+function deleteFunction(id, callback) {
+  MongoClient.connect(url, { useUnifiedTopology: true }, function (err, client) {
+    assert.equal(null, err);
+    console.log("Connected successfully to dataabse to server");
+    let db = client.db(dbName);
+
+    const query = { uniqueId: id };
+
+    db.collection("legacyProducts")
+      .deleteOne(query)
+      .then((result) => {
+        console.log(`Deleted ${result.deletedCount} item.`);
+        callback(null, result);
+      })
+      .catch((err) => console.error(`Delete failed with error: ${err}`));
+  });
+}
+
+//Check which code will delete item
+// db.collection("legacyProducts").deleteOne( { "uniqueID" : id }, function(findErr, result) {
+//   if(findErr) {
+//     throw findErr;
+//   }
+//   console.log("this is deleted",id)
+//   callback(null, result);
+// });
+
+// db.legacyProducts.find( {} )
+
+// let grabOne = (id, callback) => {
+//   Product.findOne({ uniqueID: id }).exec(callback);
+// }
 
 // * Seeds Database
 
@@ -70,5 +122,9 @@ let grabOne = (id, callback) => {
 // });
 
 module.exports = {
-  grabOne
-}
+  // grabOne
+  getFunction,
+  postFunction,
+  putFunction,
+  deleteFunction,
+};

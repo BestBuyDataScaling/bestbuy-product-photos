@@ -2907,8 +2907,8 @@ const data = [
     peopleAlsoBought: [],
     peopleAlsoViewed: [],
     recentlyViewed: false,
-  },
-];
+  }
+ ];
 
 module.exports = {
   data,

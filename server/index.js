@@ -1,88 +1,33 @@
+require('newrelic');
 const express = require("express");
-const app = express();
-const port = 2019;
+const MongoClient = require("mongodb").MongoClient;
+const path = require("path");
 const cors = require("cors");
-const db = require("../database/indexDB")
-const path = require('path')
+const app = express();
 
-// use
 app.use(express.json());
 app.use(cors());
-app.use(express.static(path.join(__dirname, '../client/build')))
+app.use(express.static(path.join(__dirname, "../client/build")));
 
-//Original Legacy code
-// server routing
-// app.get("/api/products/:id", (req, res) => {
-//   let id = req.params.id
-//   db.grabOne(id, (err, product) => {
-//     if (err) {
-//       console.log("PROBLEM WITH DB", err)
-//     } else {
-//       console.log("QUERY SUCCESSFUL")
-//       res.send(product);
-//     }
-//   })
-// });
+const url = "mongodb://localhost:27017";
 
-// CRUD ROUTES FOR NEW DATABASE
-// Create / POST - create a new item
-app.post("/api/products/:id", (req, res) => {
-  let product = req.body;
-// req.body should look like this:
-//   {
-//     "uniqueID": 999,
-//     "name": "productName"
-//     "images": [
-//        "https://loremflickr.com/320/240/dog",
-//        "https://loremflickr.com/320/240/dog",
-//        "https://loremflickr.com/320/240/dog"
-//     ]
-//  }
-  db.postFunction(product, (err, result) => {
-    if (err) {
-      console.log('Error in Database post request')
-    } else {
-      res.send(result)
-    }
-  })
-});
+MongoClient.connect(url, { useUnifiedTopology: true }, (err, db) => {
+  if (err) return console.log(err);
 
-// Read / GET - read an item
-app.get("/api/products/:id", (req, res) => {
-  let id = parseInt(req.params.id);
-  db.getFunction( id, (err, result) => {
-    if (err) {
-      console.log('Error in Database get request')
-    } else {
-      res.send(result)
-    }
-  })
-});
+  app.listen(2019, () => {
+    console.log("app working on 2019");
+  });
 
-// // Update / PUT - update an item
-app.put("/api/products/:id", (req, res) => {
-  let newInfo = req.body;
-  db.putFunction( newInfo, (err, result) => {
-    if (err) {
-      console.log('Error in Database update request')
-    } else {
-      res.send(result)
-    }
-  })
-});
+  let dbase = db.db("LegacyFEC");
 
-// // Delete / DELETE - delete an item
-app.delete("/api/products/:id", (req, res) => {
-  let id = req.params.id;
-  db.deleteFunction( id, (err, result) => {
-    if (err) {
-      console.log('Error in Database delete request')
-    } else {
-      res.send(result)
-    }
-  })
-});
-
-app.listen(port, () => {
-  console.log(`productInfo-photos_service listening at ${port}`);
+  app.get("/api/products/:id", (req, res, next) => {
+    let id = parseInt(req.params.id);
+    dbase.collection("Mongo6").findOne({ uniqueID: id }, (err, results) => {
+      if (err) {
+        console.log(err);
+        res.send("error in get route", err);
+      }
+      res.send(results);
+    });
+  });
 });

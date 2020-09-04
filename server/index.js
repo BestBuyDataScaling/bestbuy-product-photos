@@ -30,4 +30,25 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, db) => {
       res.send(results);
     });
   });
+
+  app.post("/api/products/:id", (req, res, next) => {
+    let product = req.body;
+// req.body should look like this:
+//   {
+//     "uniqueID": 999,
+//     "name": "productName"
+//     "images": [
+//        "https://loremflickr.com/320/240/dog",
+//        "https://loremflickr.com/320/240/dog",
+//        "https://loremflickr.com/320/240/dog"
+//     ]
+//  }
+    dbase.collection("Mongo6").insertOne(product, (err, result) => {
+      if(err) {
+        console.log(err);
+      }
+
+      res.send(result);
+    });
+  });
 });
